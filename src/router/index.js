@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Tour_page from '../views/Tour_page.vue'
 import Tour_Reg from '../views/Tour_Reg.vue'
 import About from '../views/About.vue'
+import Reg_page from '../views/Reg_page.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/tour_reg',
       name: 'tour_reg',
       component: Tour_Reg,
+    },
+    {
+      path: '/reg_page',
+      name: 'reg_page',
+      component: Reg_page,
     },
     {
       path: '/about',
