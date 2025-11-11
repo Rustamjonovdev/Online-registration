@@ -21,7 +21,7 @@
               :style="{ width: progressWidth + '%' }"
             ></div>
           </div>
-          <p class="text-sm text-gray-500 mt-2">{{ filledFields }}/6 maydon to'ldirildi</p>
+          <p class="text-sm text-gray-500 mt-2">{{ filledFields }}/7 maydon to'ldirildi</p>
         </div>
       </div>
 
@@ -29,12 +29,48 @@
       <div class="bg-white rounded-3xl shadow-2xl p-8 backdrop-blur-sm border border-gray-100 hover:shadow-3xl transition-shadow duration-300">
         <form @submit.prevent="handleSubmit" class="space-y-6">
           
+          <!-- Rasm yuklash -->
+          <div class="form-group">
+            <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
+              <span class="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center text-xs text-indigo-600">1</span>
+              Profil rasmi
+            </label>
+            
+            <div class="relative">
+              <input
+                type="file"
+                accept="image/*"
+                @change="onImageChange"
+                id="profile-image"
+                class="hidden"
+              />
+              <label
+                for="profile-image"
+                class="flex flex-col items-center justify-center w-full h-48 border-3 border-dashed border-indigo-300 rounded-2xl cursor-pointer bg-gradient-to-br from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 transition duration-300 group"
+              >
+                <div v-if="!imagePreview" class="text-center">
+                  <svg class="w-12 h-12 text-indigo-400 mx-auto mb-3 group-hover:scale-110 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <p class="text-sm font-semibold text-gray-700 mb-1">Rasmni yuklash</p>
+                  <p class="text-xs text-gray-500">PNG, JPG (max. 5MB)</p>
+                </div>
+                <div v-else class="relative w-full h-full p-4">
+                  <img :src="imagePreview" alt="Preview" class="w-full h-full object-cover rounded-xl" />
+                  <div class="absolute inset-0 bg-black bg-opacity-40 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <p class="text-white font-semibold text-sm">Rasmni o'zgartirish</p>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
           <!-- Ism va Familiya - Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Ism -->
             <div class="form-group">
               <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <span class="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center text-xs text-indigo-600">1</span>
+                <span class="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center text-xs text-indigo-600">2</span>
                 Ism
               </label>
               <div class="relative group">
@@ -56,7 +92,7 @@
             <!-- Familiya -->
             <div class="form-group">
               <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <span class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center text-xs text-purple-600">2</span>
+                <span class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center text-xs text-purple-600">3</span>
                 Familiya
               </label>
               <div class="relative group">
@@ -81,7 +117,7 @@
             <!-- Tug'ilgan sana -->
             <div class="form-group">
               <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <span class="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center text-xs text-pink-600">3</span>
+                <span class="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center text-xs text-pink-600">4</span>
                 Tug'ilgan sana
               </label>
               <div class="relative group">
@@ -102,7 +138,7 @@
             <!-- Jinsi -->
             <div class="form-group">
               <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs text-blue-600">4</span>
+                <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs text-blue-600">5</span>
                 Jinsi
               </label>
               <div class="relative group">
@@ -132,7 +168,7 @@
           <!-- Viloyat -->
           <div class="form-group">
             <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-xs text-green-600">5</span>
+              <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-xs text-green-600">6</span>
               Viloyat
             </label>
             <div class="relative group">
@@ -155,7 +191,7 @@
           <!-- Klubi -->
           <div class="form-group">
             <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-              <span class="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center text-xs text-yellow-600">6</span>
+              <span class="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center text-xs text-yellow-600">7</span>
               Klubi
             </label>
             <div class="relative group">
@@ -265,6 +301,7 @@
 import { reactive, computed, ref } from 'vue'
 
 const formData = reactive({
+  profileImage: null,
   firstName: '',
   lastName: '',
   birthDate: '',
@@ -274,17 +311,26 @@ const formData = reactive({
 })
 
 const showSuccess = ref(false)
+const imagePreview = ref(null)
+
+const onImageChange = (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    formData.profileImage = file;
+    imagePreview.value = URL.createObjectURL(file);
+  }
+}
 
 const filledFields = computed(() => {
-  return Object.values(formData).filter(value => value !== '').length
+  return Object.values(formData).filter(value => value !== '' && value !== null).length
 })
 
 const progressWidth = computed(() => {
-  return (filledFields.value / 6) * 100
+  return (filledFields.value / 7) * 100
 })
 
 const isFormValid = computed(() => {
-  return filledFields.value === 6
+  return filledFields.value === 7
 })
 
 const handleSubmit = () => {
@@ -295,7 +341,8 @@ const handleSubmit = () => {
     setTimeout(() => {
       showSuccess.value = false
       // Reset form
-      Object.keys(formData).forEach(key => formData[key] = '')
+      Object.keys(formData).forEach(key => formData[key] = key === 'profileImage' ? null : '')
+      imagePreview.value = null
     }, 3000)
   }
 }

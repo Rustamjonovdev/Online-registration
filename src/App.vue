@@ -465,10 +465,11 @@
 <script setup>
 import { ref } from "vue";
 import LoginModal from "@/components/Login.vue";
-import RegisterModal from "@/components/RegistrationModal.vue"
+import RegisterModal from "@/components/RegistrationModal.vue";
 
 const showLoginModal = ref(false);
 const showRegisterModal = ref(false);
+const mobileMenuOpen = ref(false);
 
 const switchToRegister = () => {
   showLoginModal.value = false;
