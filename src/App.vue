@@ -6,7 +6,7 @@
         <div class="flex items-center justify-between h-20">
           <!-- Logo -->
           <div class="flex-shrink-0 group">
-            <div class="flex items-center gap-3 cursor-pointer">
+            <router-link to="/" class="flex items-center gap-3 cursor-pointer">
               <div
                 class="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition duration-300 group-hover:scale-105"
               >
@@ -29,7 +29,7 @@
               >
                 SportHub
               </span>
-            </div>
+            </router-link>
           </div>
 
           <!-- Navigation Links -->

@@ -185,7 +185,7 @@
                     Ishtirokchilar
                   </p>
                   <p class="text-lg font-bold text-gray-800">
-                    42 ishtirokchi ro'yxatdan o'tgan
+                    {{ totalParticipants }} ishtirokchi ro'yxatdan o'tgan
                   </p>
                   <div class="mt-2 flex -space-x-2">
                     <div
@@ -200,9 +200,68 @@
                     <div
                       class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold text-white"
                     >
-                      +38
+                      +{{ totalParticipants - 3 }}
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weight Categories Statistics Section -->
+          <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-lg mb-10 border-2 border-gray-100">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              Vazn toifalari bo'yicha statistika
+            </h3>
+
+            <!-- Summary Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-5 border-2 border-indigo-200">
+                <p class="text-sm text-indigo-600 font-semibold mb-1">Jami vazn toifalari</p>
+                <p class="text-3xl font-bold text-indigo-700">{{ weightCategories.length }}</p>
+              </div>
+              <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-5 border-2 border-purple-200">
+                <p class="text-sm text-purple-600 font-semibold mb-1">Jami ishtirokchilar</p>
+                <p class="text-3xl font-bold text-purple-700">{{ totalParticipants }}</p>
+              </div>
+              <div class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-5 border-2 border-pink-200">
+                <p class="text-sm text-pink-600 font-semibold mb-1">O'rtacha (toifa)</p>
+                <p class="text-3xl font-bold text-pink-700">{{ averagePerCategory }}</p>
+              </div>
+            </div>
+
+            <!-- Weight Categories Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div 
+                v-for="category in weightCategories" 
+                :key="category.weight"
+                class="bg-gradient-to-br rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white/50"
+                :class="category.bgColor"
+              >
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                    <span class="text-white/90 text-sm font-semibold">Vazn toifasi</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <h4 class="text-3xl font-bold text-white mb-1">{{ category.weight }}</h4>
+                </div>
+                <div class="flex items-center justify-between bg-white/20 backdrop-blur-sm rounded-lg p-3">
+                  <span class="text-white/90 text-sm font-medium">Ishtirokchilar:</span>
+                  <span class="text-2xl font-bold text-white">{{ category.participants }}</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="mt-3 bg-white/20 rounded-full h-2 overflow-hidden">
+                  <div 
+                    class="bg-white h-full rounded-full transition-all duration-500"
+                    :style="{ width: (category.participants / maxParticipants * 100) + '%' }"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -427,7 +486,32 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue';
+
+const weightCategories = [
+  { weight: '48 kg', participants: 5, bgColor: 'from-blue-500 to-blue-600' },
+  { weight: '52 kg', participants: 7, bgColor: 'from-indigo-500 to-indigo-600' },
+  { weight: '57 kg', participants: 6, bgColor: 'from-purple-500 to-purple-600' },
+  { weight: '63 kg', participants: 8, bgColor: 'from-pink-500 to-pink-600' },
+  { weight: '69 kg', participants: 5, bgColor: 'from-rose-500 to-rose-600' },
+  { weight: '75 kg', participants: 4, bgColor: 'from-orange-500 to-orange-600' },
+  { weight: '81 kg', participants: 3, bgColor: 'from-amber-500 to-amber-600' },
+  { weight: '+81 kg', participants: 4, bgColor: 'from-green-500 to-green-600' }
+];
+
+const totalParticipants = computed(() => {
+  return weightCategories.reduce((sum, cat) => sum + cat.participants, 0);
+});
+
+const averagePerCategory = computed(() => {
+  return Math.round(totalParticipants.value / weightCategories.length);
+});
+
+const maxParticipants = computed(() => {
+  return Math.max(...weightCategories.map(cat => cat.participants));
+});
+</script>
 
 <style scoped>
 @keyframes pulse {
