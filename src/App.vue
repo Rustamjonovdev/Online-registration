@@ -27,7 +27,7 @@
               <span
                 class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent hidden sm:block"
               >
-                SportHub
+                SportReg
               </span>
             </router-link>
           </div>

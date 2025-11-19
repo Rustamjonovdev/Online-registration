@@ -19,7 +19,7 @@
               :style="{ width: progressWidth + '%' }"
             ></div>
           </div>
-          <p class="text-sm text-gray-500 mt-2">{{ filledFields }}/8 maydon to'ldirildi</p>
+          <p class="text-sm text-gray-500 mt-2">{{ filledFields }}/9 maydon to'ldirildi</p>
         </div>
       </div>
 
@@ -218,10 +218,49 @@
               </div>
             </div>
           </div>
+
+          <div class="form-group">
+            <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
+              <span class="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center text-xs text-orange-600">8</span>
+              Vazn toifasi (kg)
+            </label>
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400 group-focus-within:text-orange-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                </svg>
+              </div>
+              <select 
+                v-model="formData.weightCategory"
+                class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200 outline-none appearance-none bg-white hover:border-gray-300"
+                required
+              >
+                <option value="">Tanlang</option>
+                <option value="45-48">45-48 kg</option>
+                <option value="48-51">48-51 kg</option>
+                <option value="51-54">51-54 kg</option>
+                <option value="54-57">54-57 kg</option>
+                <option value="57-60">57-60 kg</option>
+                <option value="60-63.5">60-63.5 kg</option>
+                <option value="63.5-67">63.5-67 kg</option>
+                <option value="67-71">67-71 kg</option>
+                <option value="71-75">71-75 kg</option>
+                <option value="75-80">75-80 kg</option>
+                <option value="80-86">80-86 kg</option>
+                <option value="86-92">86-92 kg</option>
+                <option value="92+">92+ kg</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
+            </div>
+          </div>
           
           <div class="form-group">
             <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-              <span class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center text-xs text-red-600">8</span>
+              <span class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center text-xs text-red-600">9</span>
               Tasdiqlash kodi
               <span class="text-xs text-gray-500">(Musobaqa kodi: **{{ competitionCode }}**)</span>
             </label>
@@ -243,7 +282,6 @@
               Kiritilgan kod xato! Iltimos, musobaqa kodini tekshiring.
             </p>
           </div>
-
 
           <div class="pt-6">
             <button
@@ -281,6 +319,7 @@
                           <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Jinsi</th>
                           <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Viloyat</th>
                           <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Klub</th>
+                          <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Vazn</th>
                       </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-100">
@@ -291,6 +330,7 @@
                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ athlete.gender }}</td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ athlete.region }}</td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ athlete.club }}</td>
+                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ athlete.weightCategory }}</td>
                       </tr>
                   </tbody>
               </table>
@@ -327,126 +367,192 @@
           <div class="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-gray-200">
             <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center mx-auto mb-2">
               <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
               </svg>
             </div>
-            <h3 class="text-sm font-bold text-gray-800">Oson</h3>
-            <p class="text-xs text-gray-600">Oddiy jarayon</p>
+            <h3 class="text-sm font-bold text-gray-800">Ishonchli</h3>
+            <p class="text-xs text-gray-600">Rasmiy musobaqa</p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div v-if="showSuccess" class="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50 px-4">
-        <div class="bg-white rounded-3xl p-8 max-w-md mx-auto shadow-2xl transform transition-all animate-bounce-in">
-          <div class="text-center">
-            <div class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
-            </div>
-            <h3 class="text-3xl font-bold text-gray-800 mb-3">Tabriklaymiz! 🎉</h3>
-            <p class="text-gray-600 mb-6">Siz muvaffaqiyatli ro'yxatdan o'tdingiz. Tez orada sizga xabar beramiz.</p>
-            <button 
-              @click="showSuccess = false"
-              class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 transition duration-200"
-            >
-              Yopish
-            </button>
+    <!-- Success Modal -->
+    <div v-if="showSuccessModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+      <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full transform animate-bounce-in">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+            </svg>
           </div>
+          <h3 class="text-3xl font-bold text-gray-800 mb-2">Tabriklaymiz! 🎉</h3>
+          <p class="text-gray-600 mb-6">Siz muvaffaqiyatli ro'yxatdan o'tdingiz</p>
+          <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-4 mb-6">
+            <p class="text-sm text-gray-700 mb-2">
+              <span class="font-bold">{{ successMessage.firstName }} {{ successMessage.lastName }}</span>
+            </p>
+            <p class="text-xs text-gray-600">{{ successMessage.club }} · {{ successMessage.weightCategory }} kg</p>
+          </div>
+          <button
+            @click="closeModal"
+            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-3 px-6 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition duration-200 shadow-lg"
+          >
+            Yopish
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { reactive, computed, ref } from 'vue'
-
-const formData = reactive({
-  profileImage: null,
-  firstName: '',
-  lastName: '',
-  birthDate: '',
-  gender: '',
-  region: '',
-  club: '',
-  // Yangi maydon
-  verificationCode: '' 
-})
-
-// Musobaqa kodi (statik misol, haqiqiy ilovada bu serverdan keladi)
-const competitionCode = 'SPORT2025' 
-const showSuccess = ref(false)
-const imagePreview = ref(null)
-
-// Ro'yxatdan o'tgan sportchilar ro'yxati
-const registeredAthletes = reactive([
-    { firstName: 'Ali', lastName: 'Valiyev', birthDate: '1998-05-15', gender: 'Erkak', region: 'Toshkent', club: 'Dinamo' },
-    { firstName: 'Nigina', lastName: 'Karimova', birthDate: '2001-11-01', gender: 'Ayol', region: 'Samarqand', club: 'Bunyodkor' },
-])
-
-const onImageChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    formData.profileImage = file;
-    imagePreview.value = URL.createObjectURL(file);
-  }
-}
-
-// To'ldirilgan maydonlar sonini hisoblash (umumiy 8 ta maydon)
-const filledFields = computed(() => {
-  // .trim() ni qo'shdim, chunki kiritilgan matn bo'shliq bo'lishi mumkin
-  return Object.values(formData).filter(value => (typeof value === 'string' ? value.trim() !== '' : value !== null)).length
-})
-
-const progressWidth = computed(() => {
-  return (filledFields.value / 8) * 100 // Endi umumiy maydon 8 ta
-})
-
-// Hamma maydonlar to'ldirilganligini tekshirish
-const isFormValid = computed(() => {
-  return filledFields.value === 8
-})
-
-// Tasdiqlash kodi to'g'riligini tekshirish
-const isCodeValid = computed(() => {
-    return formData.verificationCode.toUpperCase() === competitionCode.toUpperCase()
-})
-
-const handleSubmit = () => {
-  // Ro'yxatdan o'tish uchun barcha maydonlar to'ldirilgan bo'lishi va kod to'g'ri bo'lishi kerak
-  if (isFormValid.value && isCodeValid.value) {
-    console.log('Form yuborildi:', formData)
-
-    // Yangi sportchini ro'yxatga qo'shish
-    const newAthlete = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        birthDate: formData.birthDate,
-        gender: formData.gender,
-        region: formData.region,
-        club: formData.club,
-        // Rasmni qo'shish shart emas, chunki u katta hajmli va ro'yxatda kerakmas
+<script>
+export default {
+  data() {
+    return {
+      competitionCode: 'BOXING2025',
+      formData: {
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        gender: '',
+        region: '',
+        club: '',
+        weightCategory: '',
+        verificationCode: '',
+        profileImage: null
+      },
+      imagePreview: null,
+      registeredAthletes: [],
+      showSuccessModal: false,
+      successMessage: {}
+    };
+  },
+  computed: {
+    isFormValid() {
+      return (
+        this.formData.firstName &&
+        this.formData.lastName &&
+        this.formData.birthDate &&
+        this.formData.gender &&
+        this.formData.region &&
+        this.formData.club &&
+        this.formData.weightCategory &&
+        this.formData.verificationCode &&
+        this.formData.profileImage
+      );
+    },
+    isCodeValid() {
+      return this.formData.verificationCode.toUpperCase() === this.competitionCode;
+    },
+    filledFields() {
+      let count = 0;
+      if (this.formData.profileImage) count++;
+      if (this.formData.firstName) count++;
+      if (this.formData.lastName) count++;
+      if (this.formData.birthDate) count++;
+      if (this.formData.gender) count++;
+      if (this.formData.region) count++;
+      if (this.formData.club) count++;
+      if (this.formData.weightCategory) count++;
+      if (this.formData.verificationCode) count++;
+      return count;
+    },
+    progressWidth() {
+      return (this.filledFields / 9) * 100;
     }
-    registeredAthletes.push(newAthlete)
+  },
+  async mounted() {
+    await this.loadAthletes();
+  },
+  methods: {
+    onImageChange(event) {
+      const file = event.target.files[0];
+      if (file && file.size <= 5 * 1024 * 1024) {
+        this.formData.profileImage = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imagePreview = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Rasm hajmi 5MB dan oshmasligi kerak!');
+        event.target.value = '';
+      }
+    },
+    async loadAthletes() {
+      try {
+        const result = await window.storage.list('athlete:', true);
+        if (result && result.keys) {
+          const athletes = [];
+          for (const key of result.keys) {
+            try {
+              const data = await window.storage.get(key, true);
+              if (data && data.value) {
+                athletes.push(JSON.parse(data.value));
+              }
+            } catch (err) {
+              console.log('Error loading athlete:', err);
+            }
+          }
+          this.registeredAthletes = athletes.sort((a, b) => 
+            new Date(b.timestamp) - new Date(a.timestamp)
+          );
+        }
+      } catch (error) {
+        console.log('No athletes found yet');
+        this.registeredAthletes = [];
+      }
+    },
+    async handleSubmit() {
+      if (!this.isFormValid || !this.isCodeValid) return;
 
+      try {
+        const athleteData = {
+          firstName: this.formData.firstName,
+          lastName: this.formData.lastName,
+          birthDate: this.formData.birthDate,
+          gender: this.formData.gender,
+          region: this.formData.region,
+          club: this.formData.club,
+          weightCategory: this.formData.weightCategory,
+          timestamp: new Date().toISOString()
+        };
 
-    showSuccess.value = true
-    
-    setTimeout(() => {
-      showSuccess.value = false
-      // Reset form
-      Object.keys(formData).forEach(key => formData[key] = key === 'profileImage' ? null : '')
-      imagePreview.value = null
-    }, 3000)
-  } else if (!isCodeValid.value) {
-    // Agar kod xato bo'lsa (faqat barcha maydonlar to'ldirilgan bo'lsa)
-    alert("Ro'yxatdan o'tish uchun kiritilgan tasdiqlash kodi noto'g'ri!")
-  } else {
-     // Agar hamma maydon to'ldirilmagan bo'lsa
-     alert("Ro'yxatdan o'tish uchun barcha maydonlarni to'ldiring!")
+        const athleteId = `athlete:${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        await window.storage.set(athleteId, JSON.stringify(athleteData), true);
+
+        this.successMessage = athleteData;
+        this.showSuccessModal = true;
+
+        await this.loadAthletes();
+
+        this.resetForm();
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert("Ro'yxatdan o'tishda xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
+      }
+    },
+    resetForm() {
+      this.formData = {
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        gender: '',
+        region: '',
+        club: '',
+        weightCategory: '',
+        verificationCode: '',
+        profileImage: null
+      };
+      this.imagePreview = null;
+      document.getElementById('profile-image').value = '';
+    },
+    closeModal() {
+      this.showSuccessModal = false;
+    }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -468,6 +574,15 @@ const handleSubmit = () => {
 }
 
 .animate-bounce-in {
-  animation: bounce-in 0.6s ease-out;
+  animation: bounce-in 0.5s ease-out;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 </style>

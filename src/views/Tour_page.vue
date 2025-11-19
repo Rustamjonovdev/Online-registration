@@ -3,7 +3,6 @@
     class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4"
   >
     <div class="max-w-5xl mx-auto">
-      <!-- Back Button -->
       <router-link
         to="/"
         class="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold mb-6 group"
@@ -21,12 +20,10 @@
             d="M15 19l-7-7 7-7"
           />
         </svg>
-        Orqaga qaytish
+        Asosiyga qaytish
       </router-link>
 
-      <!-- Main Card -->
       <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
-        <!-- Hero Image Section -->
         <div
           class="relative h-96 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 overflow-hidden"
         >
@@ -47,19 +44,19 @@
             </svg>
           </div>
 
-          <!-- Status Badge -->
           <div class="absolute top-6 right-6">
             <span
-              class="px-6 py-2 bg-white text-indigo-600 text-sm font-bold rounded-full shadow-xl flex items-center gap-2"
+              class="px-6 py-2 bg-white text-sm font-bold rounded-full shadow-xl flex items-center gap-2"
+              :class="isCompetitionDatePassed ? 'text-red-600' : 'text-indigo-600'"
             >
               <span
-                class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                class="w-2 h-2 rounded-full animate-pulse"
+                :class="isCompetitionDatePassed ? 'bg-red-500' : 'bg-green-500'"
               ></span>
-              Ochiq
+              {{ isCompetitionDatePassed ? 'Natijalar bilan yopildi' : 'Ochiq' }}
             </span>
           </div>
 
-          <!-- Date Badge -->
           <div class="absolute bottom-6 left-6">
             <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl">
               <div class="flex items-center gap-3">
@@ -84,16 +81,14 @@
                   <p class="text-xs text-gray-600 font-medium">
                     Musobaqa sanasi
                   </p>
-                  <p class="text-lg font-bold text-gray-800">14 Avgust, 2025</p>
+                  <p class="text-lg font-bold text-gray-800">17 Noyabr, 2025</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Content Section -->
         <div class="p-8 md:p-12">
-          <!-- Title -->
           <div class="mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-3">
               Viloyat Chempionati
@@ -117,9 +112,7 @@
             </div>
           </div>
 
-          <!-- Info Cards -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <!-- Location Card -->
             <div
               class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 border-2 border-indigo-100"
             >
@@ -158,7 +151,6 @@
               </div>
             </div>
 
-            <!-- Participants Card -->
             <div
               class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-100"
             >
@@ -208,7 +200,6 @@
             </div>
           </div>
 
-          <!-- Weight Categories Statistics Section -->
           <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-lg mb-10 border-2 border-gray-100">
             <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
               <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,7 +208,6 @@
               Vazn toifalari bo'yicha statistika
             </h3>
 
-            <!-- Summary Stats -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-5 border-2 border-indigo-200">
                 <p class="text-sm text-indigo-600 font-semibold mb-1">Jami vazn toifalari</p>
@@ -233,12 +223,11 @@
               </div>
             </div>
 
-            <!-- Weight Categories Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div 
                 v-for="category in weightCategories" 
                 :key="category.weight"
-                class="bg-gradient-to-br rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white/50"
+                class="bg-gradient-to-br rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/50"
                 :class="category.bgColor"
               >
                 <div class="flex items-center justify-between mb-3">
@@ -252,22 +241,114 @@
                 <div class="mb-3">
                   <h4 class="text-3xl font-bold text-white mb-1">{{ category.weight }}</h4>
                 </div>
-                <div class="flex items-center justify-between bg-white/20 backdrop-blur-sm rounded-lg p-3">
-                  <span class="text-white/90 text-sm font-medium">Ishtirokchilar:</span>
-                  <span class="text-2xl font-bold text-white">{{ category.participants }}</span>
+                
+                <div v-if="isCompetitionDatePassed" class="mt-4">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-3 mb-3">
+                        <span class="text-white/90 text-sm font-medium">G'olib:</span>
+                        <p class="text-xl font-bold text-white">{{ category.winner }}</p>
+                    </div>
+                    <router-link 
+                        :to="{
+                          name: 'result', 
+                          params: { weight: category.weight }
+                        }"
+                        class="w-full py-2 bg-white text-green-600 font-bold rounded-lg hover:bg-green-50 transition duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Natijalar/Setkani ko'rish
+                    </router-link>
                 </div>
-                <!-- Progress Bar -->
-                <div class="mt-3 bg-white/20 rounded-full h-2 overflow-hidden">
-                  <div 
-                    class="bg-white h-full rounded-full transition-all duration-500"
-                    :style="{ width: (category.participants / maxParticipants * 100) + '%' }"
-                  ></div>
+                <div v-else>
+                    <div class="flex items-center justify-between bg-white/20 backdrop-blur-sm rounded-lg p-3">
+                        <span class="text-white/90 text-sm font-medium">Ishtirokchilar:</span>
+                        <span class="text-2xl font-bold text-white">{{ category.participants }}</span>
+                    </div>
+                    <div class="mt-3 bg-white/20 rounded-full h-2 overflow-hidden">
+                      <div 
+                        class="bg-white h-full rounded-full transition-all duration-500"
+                        :style="{ width: (category.participants / maxParticipants * 100) + '%' }"
+                      ></div>
+                    </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- About Section -->
+          
+          <div class="bg-white rounded-2xl p-6 shadow-xl mb-10 border-2 border-indigo-100">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              Ro'yxatdan o'tgan sportchilar ({{ filteredParticipants.length }})
+            </h3>
+            
+            <div class="flex flex-col sm:flex-row gap-4 mb-6">
+              <select
+                v-model="selectedWeight"
+                class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+              >
+                <option value="">Barcha vaznlar</option>
+                <option v-for="cat in weightCategories" :key="cat.weight" :value="cat.weight">
+                  {{ cat.weight }}
+                </option>
+              </select>
+              
+              <select
+                v-model="selectedRegion"
+                class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+              >
+                <option value="">Barcha viloyatlar</option>
+                <option v-for="region in availableRegions" :key="region" :value="region">
+                  {{ region }}
+                </option>
+              </select>
+            </div>
+            
+            <div class="overflow-x-auto bg-gray-50 rounded-xl border border-gray-200">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-indigo-50">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">
+                      #
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">
+                      Ism/Familiya
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">
+                      Vazni
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-indigo-700 uppercase tracking-wider">
+                      Viloyati
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr v-if="filteredParticipants.length === 0">
+                    <td colspan="4" class="px-6 py-4 text-sm text-gray-500 text-center italic">
+                      Tanlangan mezonlar bo'yicha ishtirokchilar topilmadi.
+                    </td>
+                  </tr>
+                  <tr v-for="(participant, index) in filteredParticipants" :key="participant.id" class="hover:bg-indigo-50/50 transition duration-100">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {{ index + 1 }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">
+                      {{ participant.name }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">
+                      {{ participant.weight }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-medium">
+                      {{ participant.region }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
           <div class="mb-10">
             <div class="flex items-center gap-3 mb-4">
               <div
@@ -302,7 +383,6 @@
             </div>
           </div>
 
-          <!-- Key Details -->
           <div class="mb-10">
             <h3
               class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"
@@ -423,9 +503,9 @@
             </div>
           </div>
 
-          <!-- Registration Button -->
           <div class="flex flex-col sm:flex-row gap-4">
             <router-link
+              v-if="!isCompetitionDatePassed"
               to="/reg_page"
               class="flex-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white text-center font-bold py-5 px-8 rounded-xl hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-2xl text-lg"
             >
@@ -446,6 +526,20 @@
                 Ro'yxatdan o'tish
               </span>
             </router-link>
+            
+            <button
+                v-else
+                class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white text-center font-bold py-5 px-8 rounded-xl hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-4 focus:ring-green-300 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-2xl text-lg"
+                @click="viewSetka({ weight: 'Umumiy' })"
+            >
+                <span class="flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    Umumiy Natijalar (Setka)
+                </span>
+            </button>
+
 
             <button
               class="sm:w-auto bg-white border-2 border-indigo-600 text-indigo-600 text-center font-bold py-5 px-8 rounded-xl hover:bg-indigo-50 transition duration-200 shadow-lg"
@@ -471,7 +565,6 @@
         </div>
       </div>
 
-      <!-- Additional Info -->
       <div class="mt-8 text-center">
         <p class="text-gray-600 text-sm">
           Savol-javoblar uchun:
@@ -487,29 +580,124 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router'; 
 
+const router = useRouter(); 
+
+// --- Loyiha mantig'i uchun sanalar ---
+// Musobaqa sanasi 17-noyabrda bo'lgan
+const COMPETITION_DATE_STRING = '2025-11-17';
+// Hozirgi kun 18-noyabr
+const TODAY_DATE_STRING = '2025-11-18'; 
+
+
+// -----------------------------------------------------------
+// 🏆 Vazn toifalari ma'lumotlari (G'oliblar bilan)
+// -----------------------------------------------------------
 const weightCategories = [
-  { weight: '48 kg', participants: 5, bgColor: 'from-blue-500 to-blue-600' },
-  { weight: '52 kg', participants: 7, bgColor: 'from-indigo-500 to-indigo-600' },
-  { weight: '57 kg', participants: 6, bgColor: 'from-purple-500 to-purple-600' },
-  { weight: '63 kg', participants: 8, bgColor: 'from-pink-500 to-pink-600' },
-  { weight: '69 kg', participants: 5, bgColor: 'from-rose-500 to-rose-600' },
-  { weight: '75 kg', participants: 4, bgColor: 'from-orange-500 to-orange-600' },
-  { weight: '81 kg', participants: 3, bgColor: 'from-amber-500 to-amber-600' },
-  { weight: '+81 kg', participants: 4, bgColor: 'from-green-500 to-green-600' }
+  { weight: '48 kg', participants: 5, bgColor: 'from-blue-500 to-blue-600', winner: 'Aliyev Dilshod' },
+  { weight: '52 kg', participants: 7, bgColor: 'from-indigo-500 to-indigo-600', winner: 'Karimov Jahongir' },
+  { weight: '57 kg', participants: 6, bgColor: 'from-purple-500 to-purple-600', winner: 'Sobirov Bekzod' },
+  { weight: '63 kg', participants: 8, bgColor: 'from-pink-500 to-pink-600', winner: 'Valiyev Jamshid' },
+  { weight: '69 kg', participants: 5, bgColor: 'from-rose-500 to-rose-600', winner: 'Raufova Aziza' },
+  { weight: '75 kg', participants: 4, bgColor: 'from-orange-500 to-orange-600', winner: 'Mirzayev Kamol' },
+  { weight: '81 kg', participants: 3, bgColor: 'from-amber-500 to-amber-600', winner: 'Rustamov Farrux' },
+  { weight: '+81 kg', participants: 4, bgColor: 'from-green-500 to-green-600', winner: 'Ganiyev Rustam' }
 ];
 
+// Musobaqa sanasi kelgan yoki o'tganligini tekshirish
+const isCompetitionDatePassed = computed(() => {
+    const today = new Date(TODAY_DATE_STRING); 
+    const competitionDate = new Date(COMPETITION_DATE_STRING);
+    // Agar bugun musobaqa kuni yoki undan keyingi kun bo'lsa, TRUE qaytaradi
+    return today.getTime() > competitionDate.getTime();
+});
+
+
+// -----------------------------------------------------------
+// 🏆 Setka tugmasi bosilganda (Natijalar sahifasiga yo'naltirish)
+// -----------------------------------------------------------
+
+
+
+// --- Qolgan barcha skriptlar avvalgidek qoldi ---
+const participantsList = ref([
+  { id: 1, name: "Aliyev Sherzod", weight: '63 kg', region: "Farg'ona" },
+  { id: 2, name: "Karimov Javlon", weight: '52 kg', region: "Andijon" },
+  { id: 3, name: "Valiyev Jamshid", weight: '63 kg', region: "Namangan" },
+  { id: 4, name: "Ibragimov Otabek", weight: '48 kg', region: "Farg'ona" },
+  { id: 5, name: "Sobirov Bekzod", weight: '57 kg', region: "Toshkent sh." },
+  { id: 6, name: "Nazarov Dilshod", weight: '63 kg', region: "Samarqand" },
+  { id: 7, name: "Yusupova Gulnoza", weight: '52 kg', region: "Buxoro" },
+  { id: 8, name: "Qodirova Zaynab", weight: '48 kg', region: "Andijon" },
+  { id: 9, name: "Ramazonov Asliddin", weight: '75 kg', region: "Namangan" },
+  { id: 10, name: "Ergashev Tohir", weight: '69 kg', region: "Farg'ona" },
+  { id: 11, name: "Madaminov Sodiq", weight: '+81 kg', region: "Samarqand" },
+  { id: 12, name: "Xamroyev Eldor", weight: '57 kg', region: "Toshkent sh." },
+  { id: 13, name: "Azimova Laylo", weight: '63 kg', region: "Farg'ona" },
+  { id: 14, name: "Zokirov Akmal", weight: '52 kg', region: "Buxoro" },
+  { id: 15, name: "Rustamov Farrux", weight: '81 kg', region: "Namangan" },
+  { id: 16, name: "Davlatov Aziz", weight: '69 kg', region: "Andijon" },
+  { id: 17, name: "Sulaymonov Sardor", weight: '75 kg', region: "Toshkent sh." },
+  { id: 18, name: "Olimov Alijon", weight: '48 kg', region: "Farg'ona" },
+  { id: 19, name: "Musaeva Nigora", weight: '57 kg', region: "Samarqand" },
+  { id: 20, name: "To'rayev Nodir", weight: '+81 kg', region: "Buxoro" },
+  { id: 21, name: "Shamsiyev Ilhom", weight: '63 kg', region: "Namangan" },
+  { id: 22, name: "Jumayeva Dilorom", weight: '52 kg', region: "Farg'ona" },
+  { id: 23, name: "Halimov Abror", weight: '69 kg', region: "Toshkent sh." },
+  { id: 24, name: "Toshpulatov Said", weight: '81 kg', region: "Andijon" },
+  { id: 25, name: "Xolmatov Sobir", weight: '48 kg', region: "Samarqand" },
+  { id: 26, name: "G'aniyev Mansur", weight: '63 kg', region: "Buxoro" },
+  { id: 27, name: "Ismoilova Guli", weight: '57 kg', region: "Farg'ona" },
+  { id: 28, name: "Mirzayev Kamol", weight: '75 kg', region: "Toshkent sh." },
+  { id: 29, name: "Saidov Dilmurod", weight: '+81 kg', region: "Namangan" },
+  { id: 30, name: "Urinova Feruza", weight: '52 kg', region: "Andijon" },
+  { id: 31, name: "Vohidov Husan", weight: '63 kg', region: "Farg'ona" },
+  { id: 32, name: "Ziyayev Temur", weight: '69 kg', region: "Samarqand" },
+  { id: 33, name: "Ahmedov Qobil", weight: '48 kg', region: "Buxoro" },
+  { id: 34, name: "Eshonqulov Umid", weight: '75 kg', region: "Namangan" },
+  { id: 35, name: "Jo'rayev Bobur", weight: '57 kg', region: "Toshkent sh." },
+  { id: 36, name: "Pulatov Javohir", weight: '63 kg', region: "Andijon" },
+  { id: 37, name: "Raufova Aziza", weight: '69 kg', region: "Farg'ona" },
+  { id: 38, name: "Sattorov Jasur", weight: '75 kg', region: "Samarqand" },
+  { id: 39, name: "Xasanov Ilmiy", weight: '81 kg', region: "Buxoro" },
+  { id: 40, name: "Usmonov Furqat", weight: '+81 kg', region: "Toshkent sh." },
+  { id: 41, name: "Komilova Shaxnoza", weight: '63 kg', region: "Andijon" },
+  { id: 42, name: "Xolikov Alisher", weight: '52 kg', region: "Namangan" },
+]);
+
+const selectedWeight = ref('');
+const selectedRegion = ref('');
+
 const totalParticipants = computed(() => {
-  return weightCategories.reduce((sum, cat) => sum + cat.participants, 0);
+  return participantsList.value.length; 
 });
 
 const averagePerCategory = computed(() => {
-  return Math.round(totalParticipants.value / weightCategories.length);
+  return weightCategories.length > 0
+    ? Math.round(totalParticipants.value / weightCategories.length)
+    : 0;
 });
 
 const maxParticipants = computed(() => {
   return Math.max(...weightCategories.map(cat => cat.participants));
+});
+
+const availableRegions = computed(() => {
+  const regions = new Set(participantsList.value.map(p => p.region));
+  return Array.from(regions).sort();
+});
+
+const filteredParticipants = computed(() => {
+  let filtered = participantsList.value;
+  if (selectedWeight.value) {
+    filtered = filtered.filter(p => p.weight === selectedWeight.value);
+  }
+  if (selectedRegion.value) {
+    filtered = filtered.filter(p => p.region === selectedRegion.value);
+  }
+  return filtered;
 });
 </script>
 
