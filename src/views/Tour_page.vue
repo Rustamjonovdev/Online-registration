@@ -540,7 +540,6 @@
                 </span>
             </button>
 
-
             <button
               class="sm:w-auto bg-white border-2 border-indigo-600 text-indigo-600 text-center font-bold py-5 px-8 rounded-xl hover:bg-indigo-50 transition duration-200 shadow-lg"
             >
@@ -591,6 +590,13 @@ const COMPETITION_DATE_STRING = '2025-11-17';
 // Hozirgi kun 18-noyabr
 const TODAY_DATE_STRING = '2025-11-18'; 
 
+// Umumiy natijalar sahifasiga o'tish funksiyasi
+const viewSetka = ({ weight }) => {
+  router.push({
+    name: 'result',
+    params: { weight: weight }
+  });
+};
 
 // -----------------------------------------------------------
 // 🏆 Vazn toifalari ma'lumotlari (G'oliblar bilan)
@@ -613,13 +619,6 @@ const isCompetitionDatePassed = computed(() => {
     // Agar bugun musobaqa kuni yoki undan keyingi kun bo'lsa, TRUE qaytaradi
     return today.getTime() > competitionDate.getTime();
 });
-
-
-// -----------------------------------------------------------
-// 🏆 Setka tugmasi bosilganda (Natijalar sahifasiga yo'naltirish)
-// -----------------------------------------------------------
-
-
 
 // --- Qolgan barcha skriptlar avvalgidek qoldi ---
 const participantsList = ref([
